@@ -10,6 +10,6 @@ export async function handle(
   const lorem = await dolorSit.find();
   return {
     statusCode: 200,
-    body: JSON.stringify({ lorem, eventBody: event.body }),
+    body: JSON.stringify({ lorem, resource: event.resource }),
   };
 }
