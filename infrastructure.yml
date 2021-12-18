@@ -1,0 +1,23 @@
+AWSTemplateFormatVersion: 2010-09-09
+Transform: AWS::Serverless-2016-10-31
+Resources:
+  LoremIpsum:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: dist/handlers/lorem-ipsum.handle
+      Runtime: nodejs14.x
+      Environment:
+        Variables:
+          AC_LIGULA: "prod_ac_ligula"
+      Events:
+        Api:
+          Type: Api
+          Properties:
+            Method: ANY
+            Path: "/{proxy+}"
+            RestApiId: !Ref ApiGatewayApi
+  ApiGatewayApi:
+    Type: AWS::Serverless::Api
+    Properties:
+      StageName: "Prod"
+      Cors: "'*'"
