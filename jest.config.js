@@ -3,7 +3,7 @@ module.exports = {
   testEnvironment: 'node',
   preset: 'ts-jest',
   testMatch: ['**/?(*.)+(spec).ts'],
-  testPathIgnorePatterns: ['<rootDir>/cicd-infrastructure', '<rootDir>/.aws-sam', '<rootDir>/node_modules'],
+  testPathIgnorePatterns: ['<rootDir>/cicd-authorisation', '<rootDir>/.aws-sam', '<rootDir>/node_modules'],
   transformIgnorePatterns: ['^.+\\.js$', 'node_modules'],
   setupFilesAfterEnv: ['<rootDir>/jest/setupFilesAfterEnv.ts'],
   setupFiles: ['<rootDir>/jest/setupFiles.ts'],

@@ -22,6 +22,6 @@
     "react/no-unescaped-entities": 0,
     "react/prop-types": 0
   },
-  "ignorePatterns": ["cicd-infrastructure", "*.js", "*.d.ts"],
+  "ignorePatterns": ["cicd-authorisation", "*.js", "*.d.ts"],
   "settings": {}
 }

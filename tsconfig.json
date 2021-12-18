@@ -27,7 +27,7 @@
       }
     ]
   },
-  "exclude": ["node_modules", "cicd-infrastructure", ".aws-sam", ".github"],
+  "exclude": ["node_modules", "cicd-authorisation", ".aws-sam", ".github"],
   "emitDecoratorMetadata": true,
   "experimentalDecorators": true
 }
