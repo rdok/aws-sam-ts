@@ -1,5 +1,5 @@
 InvokeLoremIpsum:
-	node events/generate-post-confirmation_sign-up-event.js
+	node events/generate-api-gateway-event.js
 	npm run build
 	sam local invoke \
 		--event events/APIGatewayProxyEvent.json \
