@@ -1,67 +1,52 @@
-import {
-  expect as expectCDK,
-  haveResource,
-  ResourcePart,
-  stringLike,
-} from "@aws-cdk/assert";
-import { App } from "@aws-cdk/core";
-import { CICDAuthorisationStack } from "../lib/cicd-authorisation-stack";
+import { Stack } from "@aws-cdk/core";
 import { Config } from "../lib/config";
+import { Template } from "@aws-cdk/assertions";
+import { LambdaPolicy } from "../lib/lambda-policy";
 
-const app = new App();
 const config = new Config();
-const stack = new CICDAuthorisationStack(app, "MyTestStack", config);
+const stack = new Stack();
+const stackRegex = `${config.org}-*-${config.name}*`;
+new LambdaPolicy(stack, { stackRegex, config });
+const template = Template.fromStack(stack);
 
 test("Authorise Lambdas management", () => {
-  expectCDK(stack).to(
-    haveResource(
-      "AWS::IAM::ManagedPolicy",
-      {
-        Type: "AWS::IAM::ManagedPolicy",
-        Properties: {
-          PolicyDocument: {
-            Statement: [
-              {
-                Action: [
-                  "lambda:ListTags",
-                  "lambda:TagResource",
-                  "lambda:UntagResource",
-                  "lambda:UpdateFunctionCode",
-                  "lambda:GetFunction",
-                  "lambda:CreateFunction",
-                  "lambda:DeleteFunction",
-                  "lambda:GetFunctionConfiguration",
-                  "lambda:UpdateFunctionConfiguration",
-                  "lambda:PutFunctionEventInvokeConfig",
-                  "lambda:UpdateFunctionEventInvokeConfig",
-                  "lambda:DeleteFunctionEventInvokeConfig",
-                  "lambda:AddPermission",
-                  "lambda:RemovePermission",
-                  "lambda:InvokeFunction",
-                ],
-                Effect: "Allow",
-                Resource: {
-                  "Fn::Join": [
-                    "",
-                    [
-                      "arn:aws:lambda:",
-                      { Ref: "AWS::Region" },
-                      ":",
-                      { Ref: "AWS::AccountId" },
-                      `:function:${config.org}-*-${config.name}*`,
-                    ],
-                  ],
-                },
-              },
+  template.hasResourceProperties("AWS::IAM::ManagedPolicy", {
+    PolicyDocument: {
+      Statement: [
+        {
+          Action: [
+            "lambda:ListTags",
+            "lambda:TagResource",
+            "lambda:UntagResource",
+            "lambda:UpdateFunctionCode",
+            "lambda:GetFunction",
+            "lambda:CreateFunction",
+            "lambda:DeleteFunction",
+            "lambda:GetFunctionConfiguration",
+            "lambda:UpdateFunctionConfiguration",
+            "lambda:PutFunctionEventInvokeConfig",
+            "lambda:UpdateFunctionEventInvokeConfig",
+            "lambda:DeleteFunctionEventInvokeConfig",
+            "lambda:AddPermission",
+            "lambda:RemovePermission",
+            "lambda:InvokeFunction",
+          ],
+          Effect: "Allow",
+          Resource: {
+            "Fn::Join": [
+              "",
+              [
+                "arn:aws:lambda:",
+                { Ref: "AWS::Region" },
+                ":",
+                { Ref: "AWS::AccountId" },
+                `:function:${config.org}-*-${config.name}*`,
+              ],
             ],
-            Version: "2012-10-17",
           },
-          Description: "Policy to manage lambda functions: MyTestStack",
-          Path: "/",
-          Users: [{ Ref: stringLike("CICDUser*") }],
         },
-      },
-      ResourcePart.CompleteDefinition
-    )
-  );
+      ],
+      Version: "2012-10-17",
+    },
+  });
 });
