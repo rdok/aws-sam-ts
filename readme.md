@@ -1,5 +1,11 @@
 #  aws-sam-ts
 
+Rapidly create AWS SAM microservice with:
+- NodeJS TypeScript
+- AWS SAM template
+- Unit tested Lambda function
+- CI/CD pipelines through GitHub Actions
+
 # Setup
 - [Use this template][use_this_template] to create a new GitHub repository.
 
