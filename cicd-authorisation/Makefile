@@ -1,8 +1,8 @@
 .PHONY: test
-test: node_modules clean-ts
+test: node_modules
 	npm run test
 
-test-watch: node_modules clean-ts
+test-watch: node_modules
 	npm run test:watch
 
 deploy:
@@ -13,6 +13,3 @@ prettier-fix:
 
 node_modules:
 	npm ci
-
-clean-ts:
-	npm run ts:cleanup-test
