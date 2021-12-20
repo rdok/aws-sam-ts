@@ -31,6 +31,7 @@ export class CICDAuthorisationStack extends Stack {
 
     const CICDStackName = `${config.org}-${config.cicdEnvironment}-${config.name}`;
     const user = new User(this, "CICDUser", { userName: CICDStackName });
+    const role = new Role(this, "Role", { assumedBy: user });
     new CfnOutput(this, "CICD_IAM_User_Link", {
       value: `https://console.aws.amazon.com/iam/home?#/users/${user.userName}?section=security_credentials`,
     });
@@ -40,9 +41,8 @@ export class CICDAuthorisationStack extends Stack {
       config,
       stackRegex,
       deploymentBucketName: deploymentBucket.bucketName,
+      role,
     });
-    new LambdaPolicy(this, { config, stackRegex });
-
-    new Role(this, "Role", { assumedBy: user });
+    new LambdaPolicy(this, { config, stackRegex, role });
   }
 }
