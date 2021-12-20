@@ -2,6 +2,7 @@ import { Stack } from "@aws-cdk/core";
 import { Config } from "../lib/config";
 import { Match, Template } from "@aws-cdk/assertions";
 import { SamPolicy } from "../lib/sam-policy";
+import { Effect } from "@aws-cdk/aws-iam";
 
 const testStack = new Stack();
 const config = new Config();
@@ -21,7 +22,7 @@ test("Authorise default AWS SAM cloudformation actions", () => {
       "cloudformation:DescribeChangeSet",
       "cloudformation:ExecuteChangeSet",
     ],
-    Effect: "Allow",
+    Effect: Effect.ALLOW,
     Resource: [cloudformationResource(), cloudformationResourceTransform()],
   });
 });
@@ -43,7 +44,7 @@ test("Authorise default AWS SAM IAM actions", () => {
       "iam:PutRolePolicy",
       "iam:getRolePolicy",
     ],
-    Effect: "Allow",
+    Effect: Effect.ALLOW,
     Resource: iamResource(),
   });
 });
@@ -51,8 +52,16 @@ test("Authorise default AWS SAM IAM actions", () => {
 test("Authorise deployment bucket access", () => {
   assertHasPolicyStatement({
     Action: ["s3:PutObject", "s3:GetObject"],
-    Effect: "Allow",
+    Effect: Effect.ALLOW,
     Resource: `arn:aws:s3:::${deploymentBucketName}/*`,
+  });
+});
+
+test("Authorise IAM policies listing", () => {
+  assertHasPolicyStatement({
+    Action: "iam:ListPolicies",
+    Effect: Effect.ALLOW,
+    Resource: "*",
   });
 });
 

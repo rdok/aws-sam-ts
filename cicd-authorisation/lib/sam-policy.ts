@@ -56,12 +56,12 @@ export class SamPolicy {
         ],
       })
     );
-    // samPolicy.addStatements(
-    //   new PolicyStatement({
-    //     effect: Effect.ALLOW,
-    //     resources: ["*"],
-    //     actions: ["iam:ListPolicies"],
-    //   })
-    // );
+    samPolicy.addStatements(
+      new PolicyStatement({
+        effect: Effect.ALLOW,
+        resources: ["*"],
+        actions: ["iam:ListPolicies"],
+      })
+    );
   }
 }
