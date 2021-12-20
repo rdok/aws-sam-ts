@@ -49,16 +49,10 @@ test("Authorise default AWS SAM IAM actions", () => {
 });
 
 test("Authorise deployment bucket access", () => {
-  template.hasResourceProperties("AWS::IAM::ManagedPolicy", {
-    PolicyDocument: {
-      Statement: Match.arrayWith([
-        {
-          Action: ["s3:PutObject", "s3:GetObject"],
-          Effect: "Allow",
-          Resource: `arn:aws:s3:::${deploymentBucketName}/*`,
-        },
-      ]),
-    },
+  assertHasPolicyStatement({
+    Action: ["s3:PutObject", "s3:GetObject"],
+    Effect: "Allow",
+    Resource: `arn:aws:s3:::${deploymentBucketName}/*`,
   });
 });
 
