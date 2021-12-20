@@ -28,6 +28,23 @@ test("Creates IAM user", () => {
   template.hasResourceProperties("AWS::IAM::User", { UserName: CICDStackName });
 });
 
+test("Creates the IAM role to be assumed by the IAM user", () => {
+  template.hasResourceProperties("AWS::IAM::Role", {
+    AssumeRolePolicyDocument: {
+      Statement: [
+        {
+          Action: "sts:AssumeRole",
+          Effect: "Allow",
+          Principal: {
+            AWS: { "Fn::GetAtt": ["CICDUser60E098AD", "Arn"] },
+          },
+        },
+      ],
+      Version: "2012-10-17",
+    },
+  });
+});
+
 test("Output the CI/CD bucket name", () => {
   const actual = template.findOutputs("CICDBucketName");
   expect(actual.CICDBucketName.Value.Ref).toMatch(/CICDBucket.+/);
@@ -46,3 +63,8 @@ test("Output the IAM user link", () => {
     ],
   });
 });
+
+// test("Output the CI/CD role to be assumed", () => {
+//   const actual = template.findOutputs("CICDBucketName");
+//   expect(actual.CICDBucketName.Value.Ref).toMatch(/CICDBucket.+/);
+// });

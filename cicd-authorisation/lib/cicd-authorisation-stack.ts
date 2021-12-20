@@ -6,7 +6,7 @@ import {
   StackProps,
 } from "@aws-cdk/core";
 import { BlockPublicAccess, Bucket } from "@aws-cdk/aws-s3";
-import { User } from "@aws-cdk/aws-iam";
+import { Role, User } from "@aws-cdk/aws-iam";
 import { Config } from "./config";
 import { SamPolicy } from "./sam-policy";
 import { LambdaPolicy } from "./lambda-policy";
@@ -42,5 +42,7 @@ export class CICDAuthorisationStack extends Stack {
       deploymentBucketName: deploymentBucket.bucketName,
     });
     new LambdaPolicy(this, { config, stackRegex });
+
+    new Role(this, "Role", { assumedBy: user });
   }
 }
