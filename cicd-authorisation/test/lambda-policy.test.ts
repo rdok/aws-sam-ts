@@ -2,11 +2,14 @@ import { Stack } from "@aws-cdk/core";
 import { Config } from "../lib/config";
 import { Template } from "@aws-cdk/assertions";
 import { LambdaPolicy } from "../lib/lambda-policy";
+import { Role, User } from "@aws-cdk/aws-iam";
 
 const config = new Config();
 const stack = new Stack();
 const stackRegex = `${config.org}-*-${config.name}*`;
-new LambdaPolicy(stack, { stackRegex, config });
+const user = new User(stack, "CICDUser", { userName: "CICDStackName" });
+const role = new Role(stack, "Role", { assumedBy: user });
+new LambdaPolicy(stack, { stackRegex, config, role });
 const template = Template.fromStack(stack);
 
 test("Authorise Lambdas management", () => {

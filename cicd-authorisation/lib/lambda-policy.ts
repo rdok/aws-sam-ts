@@ -3,9 +3,10 @@ import { Effect, ManagedPolicy, PolicyStatement } from "@aws-cdk/aws-iam";
 import { PolicyProps } from "./types";
 
 export class LambdaPolicy {
-  constructor(stack: Stack, { stackRegex }: PolicyProps) {
+  constructor(stack: Stack, { stackRegex, role }: PolicyProps) {
     const lambdaPolicy = new ManagedPolicy(stack, "LambdaPolicy", {
       description: `Policy to manage lambda functions: ${stack.stackName}`,
+      roles: [role],
     });
     lambdaPolicy.addStatements(
       new PolicyStatement({
