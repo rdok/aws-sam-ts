@@ -35,27 +35,27 @@ export class SamPolicy {
         actions: ["s3:PutObject", "s3:GetObject"],
       })
     );
-    // samPolicy.addStatements(
-    //   new PolicyStatement({
-    //     effect: Effect.ALLOW,
-    //     resources: [`arn:aws:iam::${stack.account}:role/${stackRegex}`],
-    //     actions: [
-    //       "iam:AttachRolePolicy",
-    //       "iam:CreateRole",
-    //       "iam:DeleteRole",
-    //       "iam:DeleteRolePolicy",
-    //       "iam:UpdateAssumeRolePolicy",
-    //       "iam:GetRole",
-    //       "iam:UntagRole",
-    //       "iam:ListRoleTags",
-    //       "iam:TagRole",
-    //       "iam:PassRole",
-    //       "iam:DetachRolePolicy",
-    //       "iam:PutRolePolicy",
-    //       "iam:getRolePolicy",
-    //     ],
-    //   })
-    // );
+    samPolicy.addStatements(
+      new PolicyStatement({
+        effect: Effect.ALLOW,
+        resources: [`arn:aws:iam::${stack.account}:role/${stackRegex}`],
+        actions: [
+          "iam:AttachRolePolicy",
+          "iam:CreateRole",
+          "iam:DeleteRole",
+          "iam:DeleteRolePolicy",
+          "iam:UpdateAssumeRolePolicy",
+          "iam:GetRole",
+          "iam:UntagRole",
+          "iam:ListRoleTags",
+          "iam:TagRole",
+          "iam:PassRole",
+          "iam:DetachRolePolicy",
+          "iam:PutRolePolicy",
+          "iam:getRolePolicy",
+        ],
+      })
+    );
     // samPolicy.addStatements(
     //   new PolicyStatement({
     //     effect: Effect.ALLOW,
