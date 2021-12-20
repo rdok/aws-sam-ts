@@ -1,19 +1,19 @@
 #  aws-sam-ts
 
-Rapidly create AWS SAM microservice with:
+Rapidly create AWS SAM microservices. GitHub template to jumpstart duplicate work:
 - NodeJS TypeScript
-- AWS SAM template
+- SAM template with minimal AWS infrastructure.
 - Unit tested Lambda function
 - CI/CD pipelines through GitHub Actions
+- Least privileges IAM authorisation for CI/CD GitHub runner. Programmatically, unit tested.
 
 # Setup
 - [Use this template][use_this_template] to create a new GitHub repository.
 
 ### Least privileges for CI/CD user 
-> Efficient way to create IAM policies. Programmatically, unit tested. 
 - Clone your repository on your local machine.
 - Configure AWS CloudFormation through `infrastructurerc.json`
-- Create & authorise the CI/CD user with least priveleges. This has to be run through your local machine for security reasons.
+- Create & authorise the CI/CD user with least privileges. This has to be run through your local machine for security reasons.
   - `cd cicd-authorisation && make deploy`
 - Visit your AWS IAM dashboard and to get the credentials for the new IAM user created.
 - Add said credentials to GitHub secrets.
