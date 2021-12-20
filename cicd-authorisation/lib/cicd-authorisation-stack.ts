@@ -30,7 +30,11 @@ export class CICDAuthorisationStack extends Stack {
     });
 
     const CICDStackName = `${config.org}-${config.cicdEnvironment}-${config.name}`;
-    new User(this, "CICDUser", { userName: CICDStackName });
+    const user = new User(this, "CICDUser", { userName: CICDStackName });
+    new CfnOutput(this, "CICD_IAM_User_Link", {
+      value: `https://console.aws.amazon.com/iam/home?#/users/${user.userName}?section=security_credentials`,
+    });
+
     const stackRegex = `${config.org}-*-${config.name.substring(0, 12)}*`;
     new SamPolicy(this, {
       config,
