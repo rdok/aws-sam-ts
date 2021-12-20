@@ -6,9 +6,3 @@ InvokeLoremIpsum:
 		--template-file infrastructure.yml \
 		--env-vars .env.json \
 		'LoremIpsum'
-
-ServeAPI:
-	npm run build
-	sam local start-api \
-		--template-file infrastructure.yml \
-		--env-vars .env.json

@@ -9,15 +9,3 @@ Resources:
       Environment:
         Variables:
           AC_LIGULA: "prod_ac_ligula"
-      Events:
-        Api:
-          Type: Api
-          Properties:
-            Method: ANY
-            Path: "/{proxy+}"
-            RestApiId: !Ref ApiGatewayApi
-  ApiGatewayApi:
-    Type: AWS::Serverless::Api
-    Properties:
-      StageName: "Prod"
-      Cors: "'*'"
