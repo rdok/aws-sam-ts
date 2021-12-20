@@ -6,7 +6,7 @@ test-watch: node_modules
 	npm run test:watch
 
 deploy:
-	cdk deploy
+	npx cdk deploy
 
 prettier-fix:
 	npm run prettier:fix
