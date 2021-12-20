@@ -17,7 +17,6 @@ Rapidly create AWS SAM microservices. GitHub template to jumpstart duplicate wor
   - `cd cicd-authorisation && make deploy`
   - Use the link from the output to visit the newly created IAM user.
   - Create access keys
-- Visit your AWS IAM dashboard and to get the credentials for the new IAM user created.
 - Add said credentials to GitHub secrets.
 - Go to GitHub actions, and deploy the test stack.
 - Go to GitHub actions, and deploy the production stack.
