@@ -6,9 +6,10 @@ type SamPolicyProps = PolicyProps & { deploymentBucketName: string };
 
 export class SamPolicy {
   constructor(stack: Stack, props: SamPolicyProps) {
-    const { stackRegex, deploymentBucketName } = props;
+    const { stackRegex, deploymentBucketName, role } = props;
     const samPolicy = new ManagedPolicy(stack, "SAMPolicy", {
       description: `The minimum required policies for the AWS SAM: ${stack.stackName}`,
+      roles: [role],
     });
     samPolicy.addStatements(
       new PolicyStatement({

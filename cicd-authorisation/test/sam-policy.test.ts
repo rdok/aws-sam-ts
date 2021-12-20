@@ -2,13 +2,15 @@ import { Stack } from "@aws-cdk/core";
 import { Config } from "../lib/config";
 import { Match, Template } from "@aws-cdk/assertions";
 import { SamPolicy } from "../lib/sam-policy";
-import { Effect } from "@aws-cdk/aws-iam";
+import { Effect, Role, User } from "@aws-cdk/aws-iam";
 
 const testStack = new Stack();
 const config = new Config();
 const stackRegex = `${config.org}-*-${config.name}*`;
 const deploymentBucketName = "deploymentBucketName";
-new SamPolicy(testStack, { stackRegex, config, deploymentBucketName });
+const user = new User(testStack, "CICDUser", { userName: "CICDStackName" });
+const role = new Role(testStack, "Role", { assumedBy: user });
+new SamPolicy(testStack, { stackRegex, config, deploymentBucketName, role });
 const template = Template.fromStack(testStack);
 
 test("Authorise default AWS SAM cloudformation actions", () => {
