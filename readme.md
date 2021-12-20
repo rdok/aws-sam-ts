@@ -7,7 +7,6 @@ Rapidly create AWS SAM microservices. GitHub template to jumpstart common work:
 - Least privileges IAM authorisation for CI/CD. Programmatically, unit tested.
 
 # Setup
-### Least privileges for CI/CD user 
 - [Use this template][use_this_template] to create a new GitHub repository.
 - Clone your repository on your local machine.
 - Configure AWS CloudFormation, such as stack name, region, and others through `infrastructurerc.json`
