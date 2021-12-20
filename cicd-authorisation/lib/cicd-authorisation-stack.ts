@@ -31,10 +31,12 @@ export class CICDAuthorisationStack extends Stack {
 
     const CICDStackName = `${config.org}-${config.cicdEnvironment}-${config.name}`;
     const user = new User(this, "CICDUser", { userName: CICDStackName });
-    const role = new Role(this, "Role", { assumedBy: user });
-    new CfnOutput(this, "CICD_IAM_User_Link", {
+    new CfnOutput(this, "CICDIAMUserLink", {
       value: `https://console.aws.amazon.com/iam/home?#/users/${user.userName}?section=security_credentials`,
     });
+
+    const role = new Role(this, "CICDRole", { assumedBy: user });
+    new CfnOutput(this, "CICDRoleARN", { value: role.roleArn });
 
     const stackRegex = `${config.org}-*-${config.name.substring(0, 12)}*`;
     new SamPolicy(this, {

@@ -64,7 +64,9 @@ test("Output the IAM user link", () => {
   });
 });
 
-// test("Output the CI/CD role to be assumed", () => {
-//   const actual = template.findOutputs("CICDBucketName");
-//   expect(actual.CICDBucketName.Value.Ref).toMatch(/CICDBucket.+/);
-// });
+test("Output the role ARN", () => {
+  const actual = template.findOutputs("CICDRoleARN");
+  expect(actual.CICDRoleARN.Value).toMatchObject({
+    "Fn::GetAtt": [expect.stringMatching(/CICDRole.+/), "Arn"],
+  });
+});
