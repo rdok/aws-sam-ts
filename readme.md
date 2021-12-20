@@ -19,7 +19,8 @@ Rapidly create AWS SAM microservices. GitHub template to jumpstart common work:
 - Go to GitHub actions, and deploy the production stack.
  
 # Maintenance
-- `npx npm-check --update-all`
-- `cd cicd-authorisation && npx npm-check --update-all`
+```
+make npm-update-all
+```
 
 [use_this_template]: https://github.com/rdok/aws-sam-ts/generate
