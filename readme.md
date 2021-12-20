@@ -21,10 +21,7 @@ Rapidly create AWS SAM microservices. GitHub template to jumpstart duplicate wor
 - Go to GitHub actions, and deploy the test stack.
 - Go to GitHub actions, and deploy the production stack.
  
-### TODO
-Automate ts compilation for faster development on testing API Gateways. Simple approach is file watcher, a more complex but more value long term is webpack
-
-# Template Maintaince
+# Maintenance
 - `npx npm-check --update-all`
 - `cd cicd-authorisation && npx npm-check --update-all`
 
