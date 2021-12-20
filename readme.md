@@ -13,8 +13,10 @@ Rapidly create AWS SAM microservices. GitHub template to jumpstart duplicate wor
 ### Least privileges for CI/CD user 
 - Clone your repository on your local machine.
 - Configure AWS CloudFormation through `infrastructurerc.json`
-- Create & authorise the CI/CD user with least privileges. This has to be run through your local machine for security reasons.
+- Create & authorise the CI/CD user with the least privileges. This has to be run through your local machine to avoid putting administrator IAM credentials online.
   - `cd cicd-authorisation && make deploy`
+  - Use the link from the output to visit the newly created IAM user.
+  - Create access keys
 - Visit your AWS IAM dashboard and to get the credentials for the new IAM user created.
 - Add said credentials to GitHub secrets.
 - Go to GitHub actions, and deploy the test stack.
