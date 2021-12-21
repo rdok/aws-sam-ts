@@ -1,8 +1,8 @@
 import { Stack } from "@aws-cdk/core";
 import { Effect, ManagedPolicy, PolicyStatement } from "@aws-cdk/aws-iam";
-import { PolicyProps } from "./types";
+import { RolePolicyProps } from "./types";
 
-type SamPolicyProps = PolicyProps & { deploymentBucketName: string };
+type SamPolicyProps = RolePolicyProps & { deploymentBucketName: string };
 
 export class SamPolicy {
   constructor(stack: Stack, props: SamPolicyProps) {
