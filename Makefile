@@ -44,3 +44,7 @@ prettier:
 prettier-fix:
 	npm run prettier:fix
 
+lint:
+	yarn lint
+lint-fix:
+	yarn lint:fix
