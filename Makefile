@@ -32,6 +32,6 @@ deploy-dev:
 	sam deploy --config-env dev --no-fail-on-empty-changeset
 	npm ci
 
-npm-update-all:
+update-all-npm:
 	npx npm-check --update-all
 	cd cicd-authorisation && npx npm-check --update-all
