@@ -55,6 +55,12 @@ jobs:
           echo "AWS_SESSION_TOKEN=${AWS_SESSION_TOKEN}" >> $GITHUB_ENV
           echo "::add-mask::${AWS_SESSION_TOKEN}" # Hide secret from logs
           echo "AWS_ROLE_SESSION_NAME=cicd-access" >> $GITHUB_ENV
+      - name: NPM cache
+      - uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: ${{ runner.os }}-node-
       - name: Build
         run: |
           npm ci
