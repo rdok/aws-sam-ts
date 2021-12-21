@@ -78,10 +78,12 @@ jobs:
           npm ci --production
       - name: Deploy
         run: |
-          DEPLOY_BUCKET=$(aws --region ${{ env.aws_region }} cloudformation describe-stacks  \
-            --stack-name ${{ env.aws_region }} \
-            --query 'Stacks[0].Outputs[?OutputKey==`CICDBucketName`].OutputValue' \
-            --output text)
+          DEPLOY_BUCKET=$(aws --region ${{ env.aws_region }} \
+            cloudformation describe-stacks  \
+              --stack-name ${{ env.aws_stack_name }} \
+              --query 'Stacks[0].Outputs[?OutputKey==`CICDBucketName`].OutputValue' \
+              --output text)
+          
           sam deploy \
             --region ${{ env.aws_region }} \
             --s3-bucket "${DEPLOY_BUCKET}" \
