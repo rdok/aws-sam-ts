@@ -41,19 +41,29 @@ jobs:
       - name: Assume CI/CD role
         run: |
           AWS_ROLE_ARN=$(aws --region ${{ env.aws_region }} \
-            cloudformation describe-stacks --stack-name ${{ env.aws_cicd_stack_name }} \
-            --query 'Stacks[0].Outputs[?OutputKey==`CICDRoleARN`].OutputValue' \
-            --output text)
-          ASSUME_ROLE=$(aws --region ${{ env.aws_region }} sts assume-role \
-            --output json \
-            --role-arn $AWS_ROLE_ARN \
-            --role-session-name cicd-access \
-            --query "Credentials")
+            cloudformation describe-stacks \
+              --stack-name ${{ env.aws_cicd_stack_name }} \
+              --query 'Stacks[0].Outputs[?OutputKey==`CICDRoleARN`].OutputValue' \
+              --output text)
+          
+          AUTHORISED_USER=$(aws --region ${{ env.aws_region }} \
+            sts assume-role \
+              --output json \
+              --role-arn $AWS_ROLE_ARN \
+              --role-session-name cicd-access \
+              --query "Credentials")
+          
+          AWS_ACCESS_KEY_ID=$(echo $AUTHORISED_USER | jq -r '.AccessKeyId')
           echo "AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}" >> $GITHUB_ENV
-          echo "AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}" >> $GITHUB_ENV
+  
+          AWS_SECRET_ACCESS_KEY=$(echo $AUTHORISED_USER | jq -r '.SecretAccessKey')
           echo "::add-mask::${AWS_SECRET_ACCESS_KEY}" # Hide secret from logs
-          echo "AWS_SESSION_TOKEN=${AWS_SESSION_TOKEN}" >> $GITHUB_ENV
+          echo "AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}" >> $GITHUB_ENV
+
+          export AWS_SESSION_TOKEN=$(echo $AUTHORISED_USER | jq -r '.SessionToken')
           echo "::add-mask::${AWS_SESSION_TOKEN}" # Hide secret from logs
+          echo "AWS_SESSION_TOKEN=${AWS_SESSION_TOKEN}" >> $GITHUB_ENV
+          
           echo "AWS_ROLE_SESSION_NAME=cicd-access" >> $GITHUB_ENV
       - name: NPM cache
       - uses: actions/cache@v2
