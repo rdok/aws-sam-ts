@@ -80,7 +80,7 @@ jobs:
         run: |
           DEPLOY_BUCKET=$(aws --region ${{ env.aws_region }} \
             cloudformation describe-stacks  \
-              --stack-name ${{ env.aws_stack_name }} \
+              --stack-name ${{ env.aws_cicd_stack_name }} \
               --query 'Stacks[0].Outputs[?OutputKey==`CICDBucketName`].OutputValue' \
               --output text)
           
