@@ -10,6 +10,7 @@ import { Role, User } from "@aws-cdk/aws-iam";
 import { Config } from "./config";
 import { SamPolicy } from "./sam-policy";
 import { LambdaPolicy } from "./lambda-policy";
+import { DescribeCloudformationStacks } from "./describe-cloudformation-stacks";
 
 export class CICDAuthorisationStack extends Stack {
   constructor(
@@ -46,5 +47,6 @@ export class CICDAuthorisationStack extends Stack {
       role,
     });
     new LambdaPolicy(this, { config, stackRegex, role });
+    new DescribeCloudformationStacks(this, { config, stackRegex, user });
   }
 }
