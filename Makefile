@@ -35,3 +35,6 @@ deploy-dev:
 update-all-npm:
 	npx npm-check --update-all
 	cd cicd-authorisation && npx npm-check --update-all
+
+test-watch:
+	npm run test:watch
