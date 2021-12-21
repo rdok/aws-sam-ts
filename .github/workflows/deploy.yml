@@ -40,7 +40,7 @@ jobs:
           echo "aws_stack_name=${ORG}-${ENVIRONMENT}-${NAME}" >> $GITHUB_ENV
       - name: Assume CI/CD role
         run: |
-          AWS_ROLE_ARN=$$(aws --region ${{ env.aws_region }} \
+          AWS_ROLE_ARN=$(aws --region ${{ env.aws_region }} \
             cloudformation describe-stacks --stack-name ${{ env.aws_cicd_stack_name }} \
             --query 'Stacks[0].Outputs[?OutputKey==`CICDRoleARN`].OutputValue' \
             --output text)
