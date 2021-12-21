@@ -1,5 +1,7 @@
 #  aws-sam-ts
 
+[![Deploy][badge_svg]][deploy_workflow_link]
+
 Rapidly create AWS SAM microservices. GitHub template to jumpstart common work:
 - NodeJS TypeScript
 - SAM template with minimal Lambda function; unit tested
@@ -25,3 +27,5 @@ make npm-update-all
 ```
 
 [use_this_template]: https://github.com/rdok/aws-sam-ts/generate
+[badge_svg]: https://github.com/rdok/aws-sam-ts/actions/workflows/deploy.yml/badge.svg?branch=main 
+[deploy_workflow_link]: https://github.com/rdok/aws-sam-ts/actions/workflows/deploy.yml
