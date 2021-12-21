@@ -2,7 +2,8 @@
   "name": "aws-sam-ts",
   "region": "eu-west-1",
   "org": "rdok",
-  "environments": [
+  "testEnvironment": "test",
+  "allowedEnvironments": [
     "prod",
     "test",
     "dev"
