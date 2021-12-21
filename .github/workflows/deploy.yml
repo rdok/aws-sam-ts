@@ -13,7 +13,7 @@ on:
 jobs:
   deploy:
     environment:
-      name: ${{ env.environment }}
+      name: ${{ steps.env.outputs.environment }}
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
@@ -38,6 +38,7 @@ jobs:
           
           echo "aws_region=${AWS_REGION}" >> $GITHUB_ENV
           echo "environment=${ENVIRONMENT}" >> $GITHUB_ENV
+          echo ::set-output name=environment::"${ENVIRONMENT}"
           echo "aws_cicd_stack_name=${ORG}-cicd-${NAME}" >> $GITHUB_ENV
           echo "aws_stack_name=${ORG}-${ENVIRONMENT}-${NAME}" >> $GITHUB_ENV
       - name: Assume CI/CD role
