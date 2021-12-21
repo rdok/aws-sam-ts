@@ -3,9 +3,5 @@
   "region": "eu-west-1",
   "org": "rdok",
   "testEnvironment": "test",
-  "allowedEnvironments": [
-    "prod",
-    "test",
-    "dev"
-  ]
+  "allowedEnvironments": ["prod", "test", "dev"]
 }

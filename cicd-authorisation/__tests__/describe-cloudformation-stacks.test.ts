@@ -24,12 +24,12 @@ test("Authorise user to get CI/CD stack outputs ", () => {
               [
                 "arn:aws:cloudformation:eu-west-1:",
                 { Ref: "AWS::AccountId" },
-                `:stack/${stack.stackName}/*`
-              ]
-            ]
-          }
-        }
-      ])
-    }
+                `:stack/${stack.stackName}/*`,
+              ],
+            ],
+          },
+        },
+      ]),
+    },
   });
 });

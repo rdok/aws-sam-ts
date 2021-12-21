@@ -1,8 +1,9 @@
-#  aws-sam-ts
+# aws-sam-ts
 
 [![Deploy][badge_svg]][deploy_workflow_link]
 
 Rapidly create AWS SAM microservices. GitHub template to jumpstart common work:
+
 - NodeJS TypeScript
 - SAM template with minimal Lambda function; unit tested
 - CI/CD pipelines through GitHub Actions
@@ -10,6 +11,7 @@ Rapidly create AWS SAM microservices. GitHub template to jumpstart common work:
 - Makefile with commands to rapidly deploy dev stack locally
 
 # Setup
+
 - [Use this template][use_this_template] to create a new GitHub repository.
 - Clone your repository on your local machine.
 - Configure AWS CloudFormation, such as stack name, region, and others through `infrastructurerc.json`
@@ -20,12 +22,13 @@ Rapidly create AWS SAM microservices. GitHub template to jumpstart common work:
 - Add said credentials to GitHub secrets.
 - Go to GitHub actions, and deploy the test stack.
 - Go to GitHub actions, and deploy the production stack.
- 
+
 # Maintenance
+
 ```
 make npm-update-all
 ```
 
 [use_this_template]: https://github.com/rdok/aws-sam-ts/generate
-[badge_svg]: https://github.com/rdok/aws-sam-ts/actions/workflows/deploy.yml/badge.svg?branch=main 
+[badge_svg]: https://github.com/rdok/aws-sam-ts/actions/workflows/deploy.yml/badge.svg?branch=main
 [deploy_workflow_link]: https://github.com/rdok/aws-sam-ts/actions/workflows/deploy.yml
