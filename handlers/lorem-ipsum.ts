@@ -7,9 +7,10 @@ import {
 export async function handle(
   event: APIGatewayProxyEvent
 ): Promise<APIGatewayProxyResult> {
-  const lorem = await dolorSit.find();
+  const environmentVariable = await dolorSit.find();
+  console.log("Retrieved lorem", environmentVariable);
   return {
     statusCode: 200,
-    body: JSON.stringify({ lorem, resource: event.resource }),
+    body: JSON.stringify({ environmentVariable, resource: event.resource }),
   };
 }
