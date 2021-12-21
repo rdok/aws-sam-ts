@@ -37,7 +37,7 @@ jobs:
       - name: Check eslint
         run: npm run lint
 
-  build:
+  ts-compile:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout codebase
@@ -52,7 +52,7 @@ jobs:
       - name: Check types
         run: npm run build
 
-  tests:
+  test:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout codebase
