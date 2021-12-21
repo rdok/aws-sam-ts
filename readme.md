@@ -5,6 +5,7 @@ Rapidly create AWS SAM microservices. GitHub template to jumpstart common work:
 - SAM template with minimal Lambda function; unit tested
 - CI/CD pipelines through GitHub Actions
 - Least privileges IAM authorisation for CI/CD. Programmatically, unit tested.
+- Makefile with commands to rapidly deploy dev stack locally
 
 # Setup
 - [Use this template][use_this_template] to create a new GitHub repository.
