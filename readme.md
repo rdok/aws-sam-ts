@@ -1,6 +1,7 @@
 # aws-sam-ts
 
-[![Deploy][badge_svg]][deploy_workflow_link]
+[![Deploy][badge_svg_deploy]][workflow_link_deploy]
+[![Check][badge_svg_check]][workflow_link_check]
 
 Rapidly create AWS SAM microservices. GitHub template to jumpstart common work:
 
@@ -30,5 +31,7 @@ make npm-update-all
 ```
 
 [use_this_template]: https://github.com/rdok/aws-sam-ts/generate
-[badge_svg]: https://github.com/rdok/aws-sam-ts/actions/workflows/deploy.yml/badge.svg?branch=main
-[deploy_workflow_link]: https://github.com/rdok/aws-sam-ts/actions/workflows/deploy.yml
+[badge_svg_deploy]: https://github.com/rdok/aws-sam-ts/actions/workflows/deploy.yml/badge.svg?branch=main
+[badge_svg_check]: https://github.com/rdok/aws-sam-ts/actions/workflows/check.yml/badge.svg
+[workflow_link_deploy]: https://github.com/rdok/aws-sam-ts/actions/workflows/deploy.yml
+[workflow_link_check]: https://github.com/rdok/aws-sam-ts/actions/workflows/check.yml
