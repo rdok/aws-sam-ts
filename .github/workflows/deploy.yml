@@ -9,7 +9,7 @@ on:
     inputs:
       environment:
         required: false
-        description: "Allowed values from `allowedEnvironments@infrastructure.json`"
+        description: "Allowed values from allowedEnvironments@infrastructure.json"
 jobs:
   deploy:
     runs-on: ubuntu-20.04
