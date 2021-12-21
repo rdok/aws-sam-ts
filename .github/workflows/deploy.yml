@@ -92,4 +92,4 @@ jobs:
             --capabilities CAPABILITY_IAM \
             --no-fail-on-empty-changeset \
             --no-confirm-changeset \
-            --template infrastructure.yaml
+            --template infrastructure.yml
