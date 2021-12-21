@@ -4,7 +4,7 @@ env:
   AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   workflow_dispatch:
     inputs:
       environment:
@@ -25,17 +25,17 @@ jobs:
           if [ "$ENVIRONMENT" = "" ]; then
             ENVIRONMENT=$(jq -r '.testEnvironment' infrastructurerc.json)
           fi
-          
+
           HAS_VALID_ENV=$(jq -r ".allowedEnvironments | index(\"$ENVIRONMENT\") // empty" infrastructurerc.json)
           if [ -z "${HAS_VALID_ENV}" ]; then
             printf '%s\n' "ENVIRONMENT is not in accepted range" >&2
             exit 1
           fi
-          
+
           ORG=$(jq -r '.org' infrastructurerc.json)
           NAME=$(jq -r '.name' infrastructurerc.json)
           AWS_REGION=$(jq -r '.region' infrastructurerc.json)
-          
+
           echo "aws_region=${AWS_REGION}" >> $GITHUB_ENV
           echo "environment=${ENVIRONMENT}" >> $GITHUB_ENV
           echo ::set-output name=environment::"${ENVIRONMENT}"
@@ -48,17 +48,17 @@ jobs:
               --stack-name ${{ env.aws_cicd_stack_name }} \
               --query 'Stacks[0].Outputs[?OutputKey==`CICDRoleARN`].OutputValue' \
               --output text)
-          
+
           AUTHORISED_USER=$(aws --region ${{ env.aws_region }} \
             sts assume-role \
               --output json \
               --role-arn $AWS_ROLE_ARN \
               --role-session-name cicd-access \
               --query "Credentials")
-          
+
           AWS_ACCESS_KEY_ID=$(echo $AUTHORISED_USER | jq -r '.AccessKeyId')
           echo "AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}" >> $GITHUB_ENV
-  
+
           AWS_SECRET_ACCESS_KEY=$(echo $AUTHORISED_USER | jq -r '.SecretAccessKey')
           echo "::add-mask::${AWS_SECRET_ACCESS_KEY}" # Hide secret from logs
           echo "AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}" >> $GITHUB_ENV
@@ -66,7 +66,7 @@ jobs:
           export AWS_SESSION_TOKEN=$(echo $AUTHORISED_USER | jq -r '.SessionToken')
           echo "::add-mask::${AWS_SESSION_TOKEN}" # Hide secret from logs
           echo "AWS_SESSION_TOKEN=${AWS_SESSION_TOKEN}" >> $GITHUB_ENV
-          
+
           echo "AWS_ROLE_SESSION_NAME=cicd-access" >> $GITHUB_ENV
       - name: NPM cache
         uses: actions/cache@v2
@@ -86,7 +86,7 @@ jobs:
               --stack-name ${{ env.aws_cicd_stack_name }} \
               --query 'Stacks[0].Outputs[?OutputKey==`CICDBucketName`].OutputValue' \
               --output text)
-          
+
           sam deploy \
             --region ${{ env.aws_region }} \
             --s3-bucket "${DEPLOY_BUCKET}" \

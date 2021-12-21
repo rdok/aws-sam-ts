@@ -1,4 +1,4 @@
-**/*.js
- **/*d.ts
 .aws-sam/**
-cicd-authorisation/**
+dist/**
+
+cicd-authorisation/cdk.out/**

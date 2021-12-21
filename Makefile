@@ -38,3 +38,9 @@ update-all-npm:
 
 test-watch:
 	npm run test:watch
+
+prettier:
+	npm run prettier
+prettier-fix:
+	npm run prettier:fix
+
