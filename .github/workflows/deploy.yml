@@ -13,7 +13,7 @@ on:
 jobs:
   deploy:
     environment:
-      name: ${{ steps.env.outputs.environment }}
+      name: ${{ github.event.inputs.environment == '' && 'test' || github.event.inputs.environment }}
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
