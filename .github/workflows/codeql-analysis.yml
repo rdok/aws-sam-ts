@@ -2,7 +2,7 @@ name: "CodeQL"
 on:
   schedule: [cron: "32 8 * * 1"]
 jobs:
-  analyze:
+  codeql-analyze:
     name: Analyze
     runs-on: ubuntu-latest
     permissions:
