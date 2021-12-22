@@ -1,11 +1,11 @@
 name: "CodeQL"
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   pull_request:
-    branches: [ main ]
+    branches: [main]
   schedule:
-    - cron: '32 8 * * 1'
+    - cron: "32 8 * * 1"
 jobs:
   analyze:
     name: Analyze
@@ -17,15 +17,15 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        language: [ javascript ] # Learn more about CodeQL language support at https://git.io/codeql-language-support
+        language: [javascript] # Learn more about CodeQL language support at https://git.io/codeql-language-support
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
-    - name: Initialize CodeQL
-      uses: github/codeql-action/init@v1
-      with:
-        languages: ${{ matrix.language }}
-    - name: Autobuild
-      uses: github/codeql-action/autobuild@v1
-    - name: Perform CodeQL Analysis
-      uses: github/codeql-action/analyze@v1
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v1
+        with:
+          languages: ${{ matrix.language }}
+      - name: Autobuild
+        uses: github/codeql-action/autobuild@v1
+      - name: Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@v1
