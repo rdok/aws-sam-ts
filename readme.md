@@ -30,8 +30,6 @@ Rapidly create AWS SAM microservices. GitHub template to jumpstart common work.
 - Once you commit & git push to main branch, it will be deployed to the default test stack
 - Deploy to production environment by clicking the `Run workflow` button in `Deploy` action. [Example](https://github.com/rdok/aws-sam-ts/actions/workflows/deploy.yml)
 
-
-
 [use_this_template]: https://github.com/rdok/aws-sam-ts/generate
 [badge_svg_deploy]: https://github.com/rdok/aws-sam-ts/actions/workflows/deploy.yml/badge.svg?branch=main
 [badge_svg_check]: https://github.com/rdok/aws-sam-ts/actions/workflows/check.yml/badge.svg
