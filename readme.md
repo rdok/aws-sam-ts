@@ -15,6 +15,7 @@ Rapidly create AWS SAM microservices. GitHub template to jumpstart common work.
 - [Delegates permissions through role](https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html#delegate-using-roles) for the CI/CD security best practise; through AWS CDK unit tested.
 - Rapidly deploy dev stack locally through Makefile commands
 - Automates dependency updates through GitHub's dependabot for NPM packages & GitHub action dependencies.
+- Minimal re-usable CI checks through [reusable GitHub workflows](https://docs.github.com/en/actions/learn-github-actions/reusing-workflows)
 
 # Setup
 
