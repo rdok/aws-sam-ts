@@ -79,17 +79,14 @@ jobs:
       - name: Compile TypeScript to JavaScript
         run: npm run build
       - name: Build AWS SAM
-        run: sam build --template infrastructure.yml
       - name: Deploy
         run: |
-          ls -lat
-          ls -lat dist
-          ls -lat .aws-sam/build/LoremIpsum
           DEPLOY_BUCKET=$(aws cloudformation describe-stacks  \
               --stack-name ${{ env.aws_cicd_stack_name }} \
               --query 'Stacks[0].Outputs[?OutputKey==`CICDBucketName`].OutputValue' \
               --output text)
 
+          sam build --template infrastructure.yml
           sam deploy \
             --s3-bucket "${DEPLOY_BUCKET}" \
             --s3-prefix ${{ env.environment }} \
