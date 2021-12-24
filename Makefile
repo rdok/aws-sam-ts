@@ -17,8 +17,7 @@ deploy-cicd-auth:
 
 deploy-dev:
 	echo $$AWS_CICD_STACK_NAME
-	npm ci && npm run build
-	make sam-build
+	make build
 	AWS_ROLE_ARN=$$(aws --profile cicd_aws_sam_ts --region $$AWS_REGION \
 		cloudformation describe-stacks --stack-name $$AWS_CICD_STACK_NAME \
 		--query 'Stacks[0].Outputs[?OutputKey==`CICDRoleARN`].OutputValue' \
@@ -48,5 +47,13 @@ lint:
 lint-fix:
 	yarn lint:fix
 
-sam-build:
+build-npm: node_modules
+	npm run build
+build-sam:
 	sam build --template infrastructure.yml
+build:
+	make build-npm
+	make build-sam
+
+node_modules:
+	npm ci
