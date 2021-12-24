@@ -14,7 +14,7 @@ jobs:
   deploy:
     environment:
       name: ${{ github.event.inputs.environment == '' && 'test' || github.event.inputs.environment }}
-    needs: [prettier, eslint, ts-compile, test, codeql-analyze]
+    needs: [prettier, eslint, ts-compile, test]
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
