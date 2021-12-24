@@ -79,6 +79,8 @@ jobs:
         run: make build
       - name: Deploy
         run: |
+          ls -lat
+          ls -lat dist
           DEPLOY_BUCKET=$(aws --region ${{ env.aws_region }} \
             cloudformation describe-stacks  \
               --stack-name ${{ env.aws_cicd_stack_name }} \
