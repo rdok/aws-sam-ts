@@ -7,9 +7,11 @@ it("errors having missing ENV_EXAMPLE value", async () => {
 });
 
 it("responds with ENV_EXAMPLE value", async () => {
-  process.env.ENV_EXAMPLE = "lorem-ipsum";
+  process.env.ENV_EXAMPLE = "env-example-value";
   const { classExample } = await makeExampleClass();
-  await expect(classExample.functionExample()).resolves.toEqual("lorem-ipsum");
+  await expect(classExample.functionExample()).resolves.toEqual(
+    "env-example-value"
+  );
 });
 
 async function makeExampleClass() {

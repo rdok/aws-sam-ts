@@ -1,7 +1,7 @@
 {
   "name": "aws-sam-ts",
   "version": "1.0.0",
-  "description": "Lorem ipsum",
+  "description": "Rapidly create AWS SAM microservices. GitHub template to jumpstart common work.",
   "scripts": {
     "prettier": "prettier --check .",
     "prettier:fix": "prettier --write .",

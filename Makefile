@@ -3,14 +3,14 @@ export NAME=$(shell jq -r '.name' infrastructurerc.json)
 export ORG=$(shell jq -r '.org' infrastructurerc.json)
 export AWS_CICD_STACK_NAME=$(shell echo "${ORG}-cicd-${NAME}")
 
-InvokeLoremIpsum:
+InvokeExampleFunction:
 	node events/generate-api-gateway-event.js
 	npm run build
 	sam local invoke \
 		--event events/APIGatewayProxyEvent.json \
 		--template-file infrastructure.yml \
 		--env-vars .env.json \
-		'LoremIpsum'
+		'ExampleFunction'
 
 deploy-cicd-auth:
 	cd cicd-authorisation && make deploy
