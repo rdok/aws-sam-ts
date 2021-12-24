@@ -11,10 +11,12 @@ on:
         required: false
         description: "Allowed values from allowedEnvironments@infrastructure.json"
 jobs:
+  check:
+    uses: aws-sam-ts/rdok/.github/workflows/reusable-workflow.yml@main
   deploy:
     environment:
       name: ${{ github.event.inputs.environment == '' && 'test' || github.event.inputs.environment }}
-    needs: [prettier, eslint, ts-compile, test]
+    needs: [check]
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
@@ -94,70 +96,3 @@ jobs:
             --capabilities CAPABILITY_IAM \
             --no-fail-on-empty-changeset \
             --no-confirm-changeset
-
-  prettier:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout codebase
-        uses: actions/checkout@v2
-      - name: Enable NPM cache
-        uses: actions/cache@v2
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: ${{ runner.os }}-node-
-      - name: Install NPM packages
-        run: npm ci
-      - name: Check prettier
-        run: |
-          npm run prettier
-          CODE=$?
-          if [ "$CODE" != "0"  ]; then exit 1; fi
-
-  eslint:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout codebase
-        uses: actions/checkout@v2
-      - name: Enable NPM cache
-        uses: actions/cache@v2
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: ${{ runner.os }}-node-
-      - name: Install NPM packages
-        run: npm ci
-      - name: Check eslint
-        run: npm run lint
-
-  ts-compile:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout codebase
-        uses: actions/checkout@v2
-      - name: Enable NPM cache
-        uses: actions/cache@v2
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: ${{ runner.os }}-node-
-      - name: Install NPM packages
-        run: npm ci
-      - name: Check types
-        run: npm run build
-
-  test:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout codebase
-        uses: actions/checkout@v2
-      - name: Enable NPM cache
-        uses: actions/cache@v2
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: ${{ runner.os }}-node-
-      - name: Install NPM packages
-        run: npm ci
-      - name: Check tests
-        run: npm run test
