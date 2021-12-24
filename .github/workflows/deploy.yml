@@ -12,7 +12,7 @@ on:
         description: "Allowed values from allowedEnvironments@infrastructure.json"
 jobs:
   check:
-    uses: aws-sam-ts/rdok/.github/workflows/check.yml@main
+    uses: rdok/aws-sam-ts/.github/workflows/check.yml@main
   deploy:
     environment:
       name: ${{ github.event.inputs.environment == '' && 'test' || github.event.inputs.environment }}
