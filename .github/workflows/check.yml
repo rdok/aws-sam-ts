@@ -9,7 +9,7 @@ jobs:
     steps:
       - name: Checkout codebase
         uses: actions/checkout@v2
-      - name: NPM cache
+      - name: Enable NPM cache
         uses: actions/cache@v2
         with:
           path: ~/.npm
@@ -27,7 +27,7 @@ jobs:
     steps:
       - name: Checkout codebase
         uses: actions/checkout@v2
-      - name: NPM cache
+      - name: Enable NPM cache
         uses: actions/cache@v2
         with:
           path: ~/.npm
@@ -42,7 +42,7 @@ jobs:
     steps:
       - name: Checkout codebase
         uses: actions/checkout@v2
-      - name: NPM cache
+      - name: Enable NPM cache
         uses: actions/cache@v2
         with:
           path: ~/.npm
@@ -57,7 +57,7 @@ jobs:
     steps:
       - name: Checkout codebase
         uses: actions/checkout@v2
-      - name: NPM cache
+      - name: Enable NPM cache
         uses: actions/cache@v2
         with:
           path: ~/.npm
