@@ -7,14 +7,14 @@ Rapidly create AWS SAM microservices. GitHub template to jumpstart common work.
 
 # Features
 
-- NodeJS TypeScript
+- NodeJS TypeScript compilation to JS for AWS Lambda.
 - SAM template with minimal Lambda function
-- Unit tests for Lambda handlers
-- Unit tests for Lambda libraries
-- Customisable CI/CD pipelines through GitHub Actions.
-- Least privileges IAM authorisation for CI/CD through AWS CDK; unit tested.
+- Unit tests for Lambda handlers & libraries.
+- CI/CD pipelines through GitHub Actions.
+- CI/CD Security best practise [granting the least privileges](https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html#grant-least-privilege); through AWS CDK unit tested.
+- CI/CD Security best practise using [role to delegate permissions](https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html#delegate-using-roles). through AWS CDK unit tested.
 - Makefile with commands to rapidly deploy dev stack locally
-- Automated dependency updates through GitHub's dependabot
+- Automated dependency updates through GitHub's dependabot for NPM packages & GitHub action depedencies.
 
 # Setup
 
