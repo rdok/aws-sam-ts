@@ -78,8 +78,7 @@ jobs:
         run: npm ci
       - name: Compile TypeScript to JavaScript
         run: npm run build
-      - name: Build AWS SAM
-      - name: Deploy
+      - name: AWS SAM Build & Deploy
         run: |
           DEPLOY_BUCKET=$(aws cloudformation describe-stacks  \
               --stack-name ${{ env.aws_cicd_stack_name }} \
@@ -93,8 +92,7 @@ jobs:
             --stack-name ${{ env.aws_stack_name }} \
             --capabilities CAPABILITY_IAM \
             --no-fail-on-empty-changeset \
-            --no-confirm-changeset \
-            --template infrastructure.yml
+            --no-confirm-changeset
 
   prettier:
     runs-on: ubuntu-latest
