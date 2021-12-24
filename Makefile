@@ -16,7 +16,6 @@ deploy-cicd-auth:
 	cd cicd-authorisation && make deploy
 
 deploy-dev:
-	echo $$AWS_CICD_STACK_NAME
 	make build
 	AWS_ROLE_ARN=$$(aws --profile cicd_aws_sam_ts --region $$AWS_REGION \
 		cloudformation describe-stacks --stack-name $$AWS_CICD_STACK_NAME \

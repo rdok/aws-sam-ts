@@ -76,7 +76,10 @@ jobs:
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
           restore-keys: ${{ runner.os }}-node-
       - name: Build
-        run: make build
+        run: |
+          npm ci
+          npm run build
+          sam build --region ${{ env.aws_region }} --template infrastructure.yml
       - name: Deploy
         run: |
           ls -lat
