@@ -79,7 +79,7 @@ jobs:
         run: |
           npm ci
           npm run build
-          npm ci --production
+          sam build
       - name: Deploy
         run: |
           DEPLOY_BUCKET=$(aws --region ${{ env.aws_region }} \
