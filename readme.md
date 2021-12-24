@@ -6,6 +6,7 @@
 Rapidly create AWS SAM microservices. GitHub template to jumpstart common work.
 
 # Features
+
 - NodeJS TypeScript
 - SAM template with minimal Lambda function; unit tested
 - CI/CD pipelines through GitHub Actions
