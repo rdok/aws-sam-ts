@@ -8,11 +8,13 @@ Rapidly create AWS SAM microservices. GitHub template to jumpstart common work.
 # Features
 
 - NodeJS TypeScript
-- SAM template with minimal Lambda function; unit tested
-- CI/CD pipelines through GitHub Actions
-- Least privileges IAM authorisation for CI/CD. Programmatically, unit tested.
+- SAM template with minimal Lambda function
+- Unit tests for Lambda handlers
+- Unit tests for Lambda libraries
+- Customisable CI/CD pipelines through GitHub Actions.
+- Least privileges IAM authorisation for CI/CD through AWS CDK; unit tested.
 - Makefile with commands to rapidly deploy dev stack locally
-- Automate dependency updates through GitHub's dependabot
+- Automated dependency updates through GitHub's dependabot
 
 # Setup
 
@@ -24,14 +26,8 @@ Rapidly create AWS SAM microservices. GitHub template to jumpstart common work.
   - Use the link from the output to visit the newly created IAM user.
   - Create access key
 - Add this access key as [GitHub encrypted repository secrets](https://docs.github.com/en/actions/security-guides/encrypted-secrets#creating-encrypted-secrets-for-a-repository)
-- Once you git push to main branch, it will be deployed to the default test stack
+- Once you commit & git push to main branch, it will be deployed to the default test stack
 - Deploy to production environment by clicking the `Run workflow` button in `Deploy` action. [Example](https://github.com/rdok/aws-sam-ts/actions/workflows/deploy.yml)
-
-# Maintenance
-
-```
-make update-all-npm
-```
 
 [use_this_template]: https://github.com/rdok/aws-sam-ts/generate
 [badge_svg_deploy]: https://github.com/rdok/aws-sam-ts/actions/workflows/deploy.yml/badge.svg?branch=main
