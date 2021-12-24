@@ -1,3 +1,1 @@
-- Add reminder for the maintainer to do weekly/monthly updates.
-  - email/slack/twitter/github-action
-- Write extensive guide to setup this up
+- Write extensive guide to set up this repository
