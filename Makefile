@@ -17,8 +17,8 @@ deploy-cicd-auth:
 
 deploy-dev:
 	echo $$AWS_CICD_STACK_NAME
-	npm ci && npm run build && npm ci --production
-	sam build --template infrastructure.yml
+	npm ci && npm run build
+	make sam-build
 	AWS_ROLE_ARN=$$(aws --profile cicd_aws_sam_ts --region $$AWS_REGION \
 		cloudformation describe-stacks --stack-name $$AWS_CICD_STACK_NAME \
 		--query 'Stacks[0].Outputs[?OutputKey==`CICDRoleARN`].OutputValue' \
@@ -30,7 +30,6 @@ deploy-dev:
 	export AWS_SECRET_ACCESS_KEY=$$(echo $$ASSUME_ROLE | jq -r '.SecretAccessKey') && \
 	export AWS_SESSION_TOKEN=$$(echo $$ASSUME_ROLE | jq -r '.SessionToken') && \
 	sam deploy --config-env dev --no-fail-on-empty-changeset
-	npm ci
 
 update-all-npm:
 	npx npm-check --update-all
@@ -48,3 +47,6 @@ lint:
 	yarn lint
 lint-fix:
 	yarn lint:fix
+
+sam-build:
+	sam build --template infrastructure.yml
