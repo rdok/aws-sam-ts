@@ -1,5 +1,5 @@
-import { DolorSit } from "./dolor-sit";
+import { ClassExample } from "./class-example";
 
-const dolorSit = new DolorSit();
+const classExample = new ClassExample();
 
-export { dolorSit };
+export { classExample };

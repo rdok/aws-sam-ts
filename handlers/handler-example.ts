@@ -1,4 +1,4 @@
-import { dolorSit } from "../lib/ioc";
+import { classExample } from "../lib/ioc";
 import {
   APIGatewayProxyEvent,
   APIGatewayProxyResult,
@@ -7,7 +7,7 @@ import {
 export async function handle(
   event: APIGatewayProxyEvent
 ): Promise<APIGatewayProxyResult> {
-  const environmentVariable = await dolorSit.find();
+  const environmentVariable = await classExample.functionExample();
   console.log("Retrieved lorem", environmentVariable);
   return {
     statusCode: 200,

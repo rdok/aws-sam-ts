@@ -4,5 +4,5 @@ global.console = {
 };
 
 beforeEach(() => {
-  process.env.AC_LIGULA = "mocked_ac_ligula";
+  process.env.ENV_EXAMPLE = "mocked_env_example";
 });
