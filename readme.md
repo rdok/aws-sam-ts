@@ -17,7 +17,7 @@ Rapidly create AWS SAM microservices. GitHub template to jumpstart common work.
 - Automates dependency updates for NPM packages.
 - Automates dependency updates for GitHub actions dependencies.
 - Reuses CI checks through [reusable GitHub workflows](https://docs.github.com/en/actions/learn-github-actions/reusing-workflows)
-- Ensures `deploy` workflow runs at a time through GitHub's [concurrency](https://docs.github.com/en/actions/learn-github-actions/workflow-syntax-for-github-actions#concurrency) feature.
+- Ensures [![Deploy][badge_svg_deploy]][workflow_link_deploy] workflow runs at a time through GitHub's [concurrency](https://docs.github.com/en/actions/learn-github-actions/workflow-syntax-for-github-actions#concurrency) feature.
 
 # Setup
 
