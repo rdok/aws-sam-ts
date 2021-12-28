@@ -16,6 +16,7 @@ jobs:
   deploy:
     environment:
       name: ${{ github.event.inputs.environment == '' && 'test' || github.event.inputs.environment }}
+    concurrency: ${{ github.event.inputs.environment == '' && 'test' || github.event.inputs.environment }}
     needs: [check]
     runs-on: ubuntu-20.04
     steps:
