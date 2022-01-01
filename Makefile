@@ -27,7 +27,13 @@ deploy-dev:
 	export AWS_ACCESS_KEY_ID=$$(echo $$ASSUME_ROLE | jq -r '.AccessKeyId') && \
 	export AWS_SECRET_ACCESS_KEY=$$(echo $$ASSUME_ROLE | jq -r '.SecretAccessKey') && \
 	export AWS_SESSION_TOKEN=$$(echo $$ASSUME_ROLE | jq -r '.SessionToken') && \
-	sam deploy --config-env dev --no-fail-on-empty-changeset
+	sam deploy \
+		--stack-name "$${ORG}-dev-$${NAME}" \
+		--s3-bucket "$${ORG}-cicd-$${NAME}" \
+		--s3-prefix "dev" \
+		--region  $${AWS_REGION} \
+		--capabilities CAPABILITY_IAM \
+		--no-fail-on-empty-changeset
 
 update-all-npm:
 	npx npm-check --update-all
