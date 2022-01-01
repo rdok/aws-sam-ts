@@ -5,10 +5,10 @@ test: node_modules
 test-watch: node_modules
 	npm run test:watch
 
-deploy:
+deploy: node_modules
 	npx cdk deploy
 
-prettier-fix:
+prettier-fix: node_modules
 	npm run prettier:fix
 
 node_modules:
