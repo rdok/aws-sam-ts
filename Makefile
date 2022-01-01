@@ -2,6 +2,7 @@ export AWS_REGION=$(shell jq -r '.region' infrastructurerc.json)
 export NAME=$(shell jq -r '.name' infrastructurerc.json)
 export ORG=$(shell jq -r '.org' infrastructurerc.json)
 export AWS_CICD_STACK_NAME=$(shell echo "${ORG}-cicd-${NAME}")
+export AWS_PROFILE=cicd_aws_sam_ts
 
 InvokeExampleFunction:
 	node events/generate-api-gateway-event.js
@@ -17,11 +18,11 @@ deploy-cicd-auth:
 
 deploy-dev:
 	make build
-	AWS_ROLE_ARN=$$(aws --profile cicd_aws_sam_ts --region $$AWS_REGION \
+	AWS_ROLE_ARN=$$(aws --profile $$AWS_PROFILE --region $$AWS_REGION \
 		cloudformation describe-stacks --stack-name $$AWS_CICD_STACK_NAME \
 		--query 'Stacks[0].Outputs[?OutputKey==`CICDRoleARN`].OutputValue' \
 		--output text) && \
-	ASSUME_ROLE=$$(aws --profile cicd_aws_sam_ts --region $$AWS_REGION --output json \
+	ASSUME_ROLE=$$(aws --profile $$AWS_PROFILE  --region $$AWS_REGION --output json \
 		sts assume-role --role-arn $$AWS_ROLE_ARN --role-session-name cicd-access \
 		--query "Credentials") && \
 	export AWS_ACCESS_KEY_ID=$$(echo $$ASSUME_ROLE | jq -r '.AccessKeyId') && \
