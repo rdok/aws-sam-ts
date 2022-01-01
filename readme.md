@@ -24,6 +24,7 @@ Rapidly create AWS SAM microservices. GitHub template to jumpstart common work.
 - [Use this template][use_this_template] to create a new GitHub repository.
 - Clone your repository on your local machine.
 - Configure AWS CloudFormation, such as stack name, region, and others through `infrastructurerc.json`
+- Find & global replace `aws-sam-ts` with your service name.
 - Create & authorise the CI/CD user with the least privileges. These have to be generated through your local machine to avoid putting administrator IAM credentials online.
   - `cd cicd-authorisation && make deploy`
   - Use the link from the output to visit the newly created IAM user.
