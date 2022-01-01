@@ -31,6 +31,7 @@ Rapidly create AWS SAM microservices. GitHub template to jumpstart common work.
   - Create access key
 - Add this access key as [GitHub encrypted repository secrets](https://docs.github.com/en/actions/security-guides/encrypted-secrets#creating-encrypted-secrets-for-a-repository)
 - Once you commit & git push to main branch, it will be deployed to the default test stack
+- Verify setup by deploying development CloudFormation stack: `make deploy-dev`. This is the fastest workflow.
 - Deploy to production environment by clicking the `Run workflow` button in `Deploy` action. [Example](https://github.com/rdok/aws-sam-ts/actions/workflows/deploy.yml)
 
 [use_this_template]: https://github.com/rdok/aws-sam-ts/generate
