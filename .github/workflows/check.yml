@@ -11,12 +11,9 @@ jobs:
     steps:
       - name: Checkout codebase
         uses: actions/checkout@v2
-      - name: Enable NPM cache
-        uses: actions/cache@v2
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: ${{ runner.os }}-node-
+      - name: Setup Node with cache
+        uses: actions/setup-node@v2
+        with: { node-version: "14", cache: "npm" }
       - name: Install NPM packages
         run: npm ci
       - name: Check prettier
@@ -30,12 +27,9 @@ jobs:
     steps:
       - name: Checkout codebase
         uses: actions/checkout@v2
-      - name: Enable NPM cache
-        uses: actions/cache@v2
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: ${{ runner.os }}-node-
+      - name: Setup Node with cache
+        uses: actions/setup-node@v2
+        with: { node-version: "14", cache: "npm" }
       - name: Install NPM packages
         run: npm ci
       - name: Check eslint
@@ -46,12 +40,9 @@ jobs:
     steps:
       - name: Checkout codebase
         uses: actions/checkout@v2
-      - name: Enable NPM cache
-        uses: actions/cache@v2
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: ${{ runner.os }}-node-
+      - name: Setup Node with cache
+        uses: actions/setup-node@v2
+        with: { node-version: "14", cache: "npm" }
       - name: Install NPM packages
         run: npm ci
       - name: Compile TypeScript to JavaScript
@@ -62,12 +53,25 @@ jobs:
     steps:
       - name: Checkout codebase
         uses: actions/checkout@v2
-      - name: Enable NPM cache
-        uses: actions/cache@v2
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: ${{ runner.os }}-node-
+      - name: Setup Node with cache
+        uses: actions/setup-node@v2
+        with: { node-version: "14", cache: "npm" }
+      - name: Install NPM packages
+        run: npm ci
+      - name: Check tests
+        run: npm run test
+
+  cicd-authorisation-test:
+    defaults:
+      run:
+        working-directory: cicd-authorisation
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout codebase
+        uses: actions/checkout@v2
+      - name: Setup Node with cache
+        uses: actions/setup-node@v2
+        with: { cache: "npm" }
       - name: Install NPM packages
         run: npm ci
       - name: Check tests
