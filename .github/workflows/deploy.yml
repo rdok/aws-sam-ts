@@ -71,12 +71,9 @@ jobs:
           echo "AWS_SESSION_TOKEN=${AWS_SESSION_TOKEN}" >> $GITHUB_ENV
 
           echo "AWS_ROLE_SESSION_NAME=cicd-access" >> $GITHUB_ENV
-      - name: Enable NPM cache
-        uses: actions/cache@v2
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: ${{ runner.os }}-node-
+      - name: Setup Node with cache
+        uses: actions/setup-node@v2
+        with: { node-version: "14", cache: "npm" }
       - name: Install NPM packages
         run: npm ci
       - name: Compile TypeScript to JavaScript
