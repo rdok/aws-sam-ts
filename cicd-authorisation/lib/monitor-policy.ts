@@ -25,7 +25,7 @@ export class MonitorPolicy {
 
     monitorPolicy.addStatements(
       new PolicyStatement({
-        actions: ["cloudwatch:PutMetricAlarm"],
+        actions: ["cloudwatch:PutMetricAlarm", "cloudwatch:DeleteAlarms"],
         effect: Effect.ALLOW,
         resources: [
           `arn:aws:cloudwatch:${stack.region}:${stack.account}:alarm:${stackRegex}`,

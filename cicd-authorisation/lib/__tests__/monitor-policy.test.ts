@@ -37,7 +37,7 @@ test("Authorise SNS monitoring AWS resources", () => {
 
 test("Authorise CloudWatch monitoring AWS resources", () => {
   assertHasPolicyStatement({
-    Action: "cloudwatch:PutMetricAlarm",
+    Action: ["cloudwatch:PutMetricAlarm", "cloudwatch:DeleteAlarms"],
     Effect: Effect.ALLOW,
     Resource: {
       "Fn::Join": [
