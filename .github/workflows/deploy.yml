@@ -35,7 +35,7 @@ jobs:
             printf '%s\n' "ENVIRONMENT is not in accepted range" >&2
             exit 1
           fi
-          
+
           PROD_ENVIRONMENT=$(jq -r '.productionEnvironment' infrastructurerc.json)
           if [ "$ENVIRONMENT" == "$PROD_ENVIRONMENT" ]; then 
             echo "is_production=true" >> $GITHUB_ENV
