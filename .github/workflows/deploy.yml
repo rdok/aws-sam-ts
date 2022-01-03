@@ -35,6 +35,13 @@ jobs:
             printf '%s\n' "ENVIRONMENT is not in accepted range" >&2
             exit 1
           fi
+          
+          PROD_ENVIRONMENT=$(jq -r '.productionEnvironment' infrastructurerc.json)
+          if [ "$ENVIRONMENT" == "$PROD_ENVIRONMENT" ]; then 
+            echo "is_production=true" >> $GITHUB_ENV
+          else
+            echo "is_production=false" >> $GITHUB_ENV
+          fi
 
           ORG=$(jq -r '.org' infrastructurerc.json)
           NAME=$(jq -r '.name' infrastructurerc.json)
@@ -93,4 +100,5 @@ jobs:
             --stack-name ${{ env.aws_stack_name }} \
             --capabilities CAPABILITY_IAM \
             --no-fail-on-empty-changeset \
+            --parameter-overrides "IsProduction=${{ env.is_production }}"
             --no-confirm-changeset

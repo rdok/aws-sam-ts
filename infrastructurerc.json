@@ -3,5 +3,6 @@
   "region": "eu-west-1",
   "org": "rdok",
   "testEnvironment": "test",
+  "productionEnvironment": "prod",
   "allowedEnvironments": ["prod", "test", "dev"]
 }
