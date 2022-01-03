@@ -1,8 +1,8 @@
 import { Stack } from "@aws-cdk/core";
-import { Config } from "../lib/config";
 import { Match, Template } from "@aws-cdk/assertions";
 import { User } from "@aws-cdk/aws-iam";
-import { DescribeCloudformationStacks } from "../lib/describe-cloudformation-stacks";
+import { Config } from "../config";
+import { DescribeCloudformationStacks } from "../describe-cloudformation-stacks";
 
 const config = new Config();
 const stack = new Stack();

@@ -1,7 +1,7 @@
 import { App } from "@aws-cdk/core";
-import { CICDAuthorisationStack } from "../lib/cicd-authorisation-stack";
-import { Config } from "../lib/config";
 import { Template } from "@aws-cdk/assertions";
+import { Config } from "../config";
+import { CICDAuthorisationStack } from "../cicd-authorisation-stack";
 
 const config = new Config();
 const stack = new CICDAuthorisationStack(new App(), "MyTestStack", config);

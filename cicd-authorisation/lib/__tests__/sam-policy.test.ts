@@ -1,7 +1,7 @@
 import { Stack } from "@aws-cdk/core";
-import { Config } from "../lib/config";
+import { Config } from "../config";
 import { Match, Template } from "@aws-cdk/assertions";
-import { SamPolicy } from "../lib/sam-policy";
+import { SamPolicy } from "../sam-policy";
 import { Effect, Role, User } from "@aws-cdk/aws-iam";
 
 const testStack = new Stack();

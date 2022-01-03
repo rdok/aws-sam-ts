@@ -11,6 +11,7 @@ import { Config } from "./config";
 import { SamPolicy } from "./sam-policy";
 import { LambdaPolicy } from "./lambda-policy";
 import { DescribeCloudformationStacks } from "./describe-cloudformation-stacks";
+import { MonitorPolicy } from "./monitor-policy";
 
 export class CICDAuthorisationStack extends Stack {
   constructor(
@@ -48,5 +49,6 @@ export class CICDAuthorisationStack extends Stack {
     });
     new LambdaPolicy(this, { config, stackRegex, role });
     new DescribeCloudformationStacks(this, { config, stackRegex, user });
+    new MonitorPolicy(this, { config, stackRegex, role });
   }
 }
