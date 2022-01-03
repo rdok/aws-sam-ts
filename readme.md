@@ -29,7 +29,7 @@ Rapidly create AWS SAM microservices. GitHub template to jumpstart common work.
   - `cd cicd-authorisation && make deploy`
   - Use the link from the output to visit the newly created IAM user.
   - Create access key
-- Add this access key as [GitHub encrypted repository secrets](https://docs.github.com/en/actions/security-guides/encrypted-secrets#creating-encrypted-secrets-for-a-repository)
+- Add the access keys as [GitHub encrypted repository secrets](https://docs.github.com/en/actions/security-guides/encrypted-secrets#creating-encrypted-secrets-for-a-repository): [AWS_ACCESS_KEY_ID & AWS_SECRET_ACCESS_KEY](https://github.com/rdok/aws-sam-ts/blob/e0a64f5d81c1e57c72a5aa0247e6939016d3a4da/.github/workflows/deploy.yml#L3)
 - Once you commit & git push to main branch, it will be deployed to the default test stack
 - Verify setup by deploying development CloudFormation stack:
   - This is the fastest development workflow and highly recommended.
