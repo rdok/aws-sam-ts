@@ -34,6 +34,7 @@ deploy-dev:
 		--s3-prefix "dev" \
 		--region  $${AWS_REGION} \
 		--capabilities CAPABILITY_IAM \
+		--parameter-overrides 'IsProduction=false' \
 		--no-fail-on-empty-changeset
 
 update-all-npm:
