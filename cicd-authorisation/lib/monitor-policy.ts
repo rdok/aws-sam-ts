@@ -22,5 +22,15 @@ export class MonitorPolicy {
         ],
       })
     );
+
+    monitorPolicy.addStatements(
+      new PolicyStatement({
+        actions: ["cloudwatch:PutMetricAlarm"],
+        effect: Effect.ALLOW,
+        resources: [
+          `arn:aws:cloudwatch:${stack.region}:${stack.account}:alarm:${stackRegex}`,
+        ],
+      })
+    );
   }
 }

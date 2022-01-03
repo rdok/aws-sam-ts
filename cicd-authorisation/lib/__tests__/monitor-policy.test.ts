@@ -16,7 +16,7 @@ new MonitorPolicy(testStack, {
 });
 const template = Template.fromStack(testStack);
 
-test("Authorise monitoring AWS resources", () => {
+test("Authorise SNS monitoring AWS resources", () => {
   assertHasPolicyStatement({
     Action: ["SNS:CreateTopic", "SNS:GetTopicAttributes", "SNS:DeleteTopic"],
     Effect: Effect.ALLOW,
@@ -29,6 +29,25 @@ test("Authorise monitoring AWS resources", () => {
           ":",
           { Ref: "AWS::AccountId" },
           `:${stackRegex}`,
+        ],
+      ],
+    },
+  });
+});
+
+test("Authorise CloudWatch monitoring AWS resources", () => {
+  assertHasPolicyStatement({
+    Action: "cloudwatch:PutMetricAlarm",
+    Effect: Effect.ALLOW,
+    Resource: {
+      "Fn::Join": [
+        "",
+        [
+          "arn:aws:cloudwatch:",
+          { Ref: "AWS::Region" },
+          ":",
+          { Ref: "AWS::AccountId" },
+          `:alarm:${stackRegex}`,
         ],
       ],
     },
