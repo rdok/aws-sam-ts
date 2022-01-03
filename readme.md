@@ -11,6 +11,7 @@ Rapidly create AWS SAM microservices. GitHub template to jumpstart common work.
 - Uses SAM template to create Lambda function
 - Unit tests the Lambda handlers & libraries.
 - Runs CI/CD pipelines through GitHub Actions.
+- Monitors Lambda errors, and triggers CloudWatch Alarm.
 - [Grants the least privileges](https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html#grant-least-privilege) CI/CD security best practise; through AWS CDK unit tested.
 - [Delegates permissions through role](https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html#delegate-using-roles) CI/CD security best practise; through AWS CDK unit tested.
 - Rapidly deploys dev stack locally through Makefile commands
