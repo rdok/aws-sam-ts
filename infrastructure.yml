@@ -36,6 +36,7 @@ Resources:
 
 Outputs:
   MonitorActionsArn:
+    Condition: CreateProdResources
     Value: !Ref MonitorActions
     Export: { Name: !Sub "${AWS::StackName}-MonitorActions" }
     Description: "Import this to AWS-Chatbot Slack, to subscribe emails, etc."
