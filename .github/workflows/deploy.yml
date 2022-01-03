@@ -100,5 +100,5 @@ jobs:
             --stack-name ${{ env.aws_stack_name }} \
             --capabilities CAPABILITY_IAM \
             --no-fail-on-empty-changeset \
-            --parameter-overrides "IsProduction=${{ env.is_production }}"
+            --parameter-overrides "IsProduction=${{ env.is_production }}" \
             --no-confirm-changeset
