@@ -37,6 +37,7 @@ Rapidly create AWS SAM microservices. GitHub template to jumpstart common work.
   - Add an AWS profile in `~/.aws/credentials` named `cicd_{{your_service_name}}` with credentials retrieved from cicd-authorisation creation.
   - `make deploy-dev`.
 - Deploy to production environment by clicking the `Run workflow` button in `Deploy` action. [Example](https://github.com/rdok/aws-sam-ts/actions/workflows/deploy.yml)
+- Use the exported output `MonitorActionsArn` to integrate with AWS Chatbot Slack, emails, or other integration types.
 
 [use_this_template]: https://github.com/rdok/aws-sam-ts/generate
 [badge_svg_deploy]: https://github.com/rdok/aws-sam-ts/actions/workflows/deploy.yml/badge.svg?branch=main
