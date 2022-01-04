@@ -18,7 +18,7 @@
     "@aws-cdk/aws-s3": "^1.137.0",
     "@aws-cdk/core": "^1.137.0",
     "@types/jest": "^27.4.0",
-    "@types/node": "^17.0.6",
+    "@types/node": "^17.0.7",
     "aws-cdk": "^2.3.0",
     "jest": "^27.4.5",
     "prettier": "^2.5.1",
