@@ -2,10 +2,10 @@ version: 2
 updates:
   - package-ecosystem: "github-actions"
     directory: "/"
-    schedule: { interval: "daily" }
+    schedule: { interval: "weekly" }
   - package-ecosystem: "npm"
     directory: "/"
-    schedule: { interval: "daily" }
+    schedule: { interval: "weekly" }
   - package-ecosystem: "npm"
     directory: "cicd-authorisation"
-    schedule: { interval: "daily" }
+    schedule: { interval: "weekly" }
