@@ -1,8 +1,5 @@
 import { classExample } from "../lib/ioc";
-import {
-  APIGatewayProxyEvent,
-  APIGatewayProxyResult,
-} from "aws-lambda/trigger/api-gateway-proxy";
+import { APIGatewayProxyEvent, APIGatewayProxyResult } from "aws-lambda";
 
 export async function handle(
   event: APIGatewayProxyEvent
