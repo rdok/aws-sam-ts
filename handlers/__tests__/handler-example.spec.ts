@@ -1,5 +1,5 @@
 import { handle } from "../handler-example";
-import { APIGatewayProxyEvent } from "aws-lambda/trigger/api-gateway-proxy";
+import { APIGatewayProxyEvent } from "aws-lambda";
 import { createMock } from "ts-auto-mock";
 
 it("responds with an OK message", async () => {
