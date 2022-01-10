@@ -61,7 +61,7 @@ jobs:
       - name: Check tests
         run: npm run test
 
-  cicd-authorisation-test:
+  cicd-authorisation:
     defaults:
       run:
         working-directory: cicd-authorisation
