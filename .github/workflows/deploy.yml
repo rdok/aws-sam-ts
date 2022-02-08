@@ -10,6 +10,7 @@ on:
       environment:
         required: false
         description: "Allowed values from allowedEnvironments@infrastructure.json"
+        default: prod
 jobs:
   check:
     uses: rdok/aws-sam-ts/.github/workflows/check.yml@main
