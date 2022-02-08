@@ -7,6 +7,7 @@ export AWS_PROFILE=cicd_aws_sam_ts
 InvokeExampleFunction:
 	node events/generate-api-gateway-event.js
 	npm run build
+	export AWS_PROFILE=default && \
 	sam local invoke \
 		--event events/APIGatewayProxyEvent.json \
 		--template-file infrastructure.yml \
