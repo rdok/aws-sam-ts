@@ -1,11 +1,8 @@
 AWSTemplateFormatVersion: 2010-09-09
 Transform: AWS::Serverless-2016-10-31
 Parameters:
-  IsProduction:
-    Type: String
-    Default: "false"
-Conditions:
-  CreateProdResources: !Equals [!Ref IsProduction, "true"]
+  AwsChatBotStackName: { Type: String }
+  NodeENV: { Type: String }
 Resources:
   ExampleFunction:
     Type: AWS::Serverless::Function
@@ -16,7 +13,6 @@ Resources:
         Variables:
           ENV_EXAMPLE: "example_env_value"
   MonitorExampleFunction:
-    Condition: CreateProdResources
     Type: AWS::CloudWatch::Alarm
     Properties:
       ComparisonOperator: GreaterThanOrEqualToThreshold
@@ -28,15 +24,7 @@ Resources:
       Statistic: Sum
       Threshold: 1
       TreatMissingData: notBreaching
-      AlarmActions: [!Ref MonitorActions]
-      OKActions: [!Ref MonitorActions]
-  MonitorActions:
-    Condition: CreateProdResources
-    Type: AWS::SNS::Topic
-
-Outputs:
-  MonitorActionsArn:
-    Condition: CreateProdResources
-    Value: !Ref MonitorActions
-    Export: { Name: !Sub "${AWS::StackName}-MonitorActions" }
-    Description: "Import this to AWS-Chatbot Slack, to subscribe emails, etc."
+      AlarmActions:
+        - Fn::ImportValue: !Sub "${AwsChatBotStackName}-ErrorsListenerArn"
+      OKActions:
+        - Fn::ImportValue: !Sub "${AwsChatBotStackName}-ErrorsListenerArn"

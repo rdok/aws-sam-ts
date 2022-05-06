@@ -1,4 +1,3 @@
 .aws-sam/**
 dist/**
-
 cicd-authorisation/cdk.out/**

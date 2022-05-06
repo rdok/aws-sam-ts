@@ -1,4 +1,4 @@
-export AWS_REGION=$(shell jq -r '.region' infrastructurerc.json)
+export AWS_DEFAULT_REGION=$(shell jq -r '.region' infrastructurerc.json)
 export NAME=$(shell jq -r '.name' infrastructurerc.json)
 export ORG=$(shell jq -r '.org' infrastructurerc.json)
 export AWS_CICD_STACK_NAME=$(shell echo "${ORG}-cicd-${NAME}")
@@ -17,25 +17,24 @@ InvokeExampleFunction:
 deploy-cicd-auth:
 	cd cicd-authorisation && make deploy
 
-deploy-dev:
+build-deploy-dev:
 	make build
-	AWS_ROLE_ARN=$$(aws --profile $$AWS_PROFILE --region $$AWS_REGION \
+	AWS_ROLE_ARN=$$(aws --profile $$AWS_PROFILE \
 		cloudformation describe-stacks --stack-name $$AWS_CICD_STACK_NAME \
 		--query 'Stacks[0].Outputs[?OutputKey==`CICDRoleARN`].OutputValue' \
 		--output text) && \
-	ASSUME_ROLE=$$(aws --profile $$AWS_PROFILE  --region $$AWS_REGION --output json \
+	ASSUME_ROLE=$$(aws --profile $$AWS_PROFILE --output json \
 		sts assume-role --role-arn $$AWS_ROLE_ARN --role-session-name cicd-access \
 		--query "Credentials") && \
 	export AWS_ACCESS_KEY_ID=$$(echo $$ASSUME_ROLE | jq -r '.AccessKeyId') && \
 	export AWS_SECRET_ACCESS_KEY=$$(echo $$ASSUME_ROLE | jq -r '.SecretAccessKey') && \
 	export AWS_SESSION_TOKEN=$$(echo $$ASSUME_ROLE | jq -r '.SessionToken') && \
 	sam deploy \
+		--config-env dev \
 		--stack-name "$${ORG}-dev-$${NAME}" \
 		--s3-bucket "$${ORG}-cicd-$${NAME}" \
 		--s3-prefix "dev" \
-		--region  $${AWS_REGION} \
 		--capabilities CAPABILITY_IAM \
-		--parameter-overrides 'IsProduction=false' \
 		--no-fail-on-empty-changeset
 
 update-all-npm:
@@ -46,7 +45,7 @@ test-watch:
 	npm run test:watch
 test:
 	npm run test
-cicd-authorisation-test:
+cicd-authorisation-test: cicd-authorisation/node_modules
 	cd cicd-authorisation &&  npm run test
 
 prettier:
@@ -66,6 +65,9 @@ build-sam:
 build:
 	make build-npm
 	make build-sam
+
+cicd-authorisation/node_modules:
+	cd cicd-authorisation && npm install
 
 node_modules:
 	npm ci
