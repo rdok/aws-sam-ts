@@ -8,7 +8,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       Handler: dist/handlers/handler-example.handle
-      Runtime: nodejs14.x
+      Runtime: nodejs16.x
       Environment:
         Variables:
           ENV_EXAMPLE: "example_env_value"
