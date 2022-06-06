@@ -1,6 +1,5 @@
 {
   "compilerOptions": {
-    "outDir": "dist",
     "resolveJsonModule": true,
     "esModuleInterop": true,
     "target": "ES2018",

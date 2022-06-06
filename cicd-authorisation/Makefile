@@ -8,8 +8,12 @@ test-watch: node_modules
 deploy: node_modules
 	npx cdk deploy
 
-prettier-fix: node_modules
+prettier-fix:
 	npm run prettier:fix
 
 node_modules:
 	npm ci
+
+
+update:
+	npx npm-check --update-all

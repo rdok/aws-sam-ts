@@ -1,12 +1,12 @@
 import {
   CfnOutput,
-  Construct,
   RemovalPolicy,
   Stack,
   StackProps,
-} from "@aws-cdk/core";
-import { BlockPublicAccess, Bucket } from "@aws-cdk/aws-s3";
-import { Role, User } from "@aws-cdk/aws-iam";
+} from "aws-cdk-lib";
+import { Construct } from "constructs";
+import { BlockPublicAccess, Bucket } from "aws-cdk-lib/aws-s3";
+import { Role, User } from "aws-cdk-lib/aws-iam";
 import { Config } from "./config";
 import { SamPolicy } from "./sam-policy";
 import { LambdaPolicy } from "./lambda-policy";

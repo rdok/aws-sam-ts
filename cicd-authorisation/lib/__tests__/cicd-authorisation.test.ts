@@ -1,5 +1,5 @@
-import { App } from "@aws-cdk/core";
-import { Template } from "@aws-cdk/assertions";
+import { App } from "aws-cdk-lib";
+import { Template } from "aws-cdk-lib/assertions";
 import { Config } from "../config";
 import { CICDAuthorisationStack } from "../cicd-authorisation-stack";
 
