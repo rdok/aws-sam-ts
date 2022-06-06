@@ -1,6 +1,6 @@
 name: Deploy
 env:
-  AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+  AWS_ACCESS_KEY_ID: "AKIAVEPBBWCCQBYL7X65"
   AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 on:
   push:
@@ -10,7 +10,6 @@ on:
       environment:
         required: false
         description: "Allowed values from allowedEnvironments@infrastructure.json"
-        default: prod
 jobs:
   check:
     uses: rdok/aws-sam-ts/.github/workflows/check.yml@main
@@ -19,7 +18,7 @@ jobs:
       name: ${{ github.event.inputs.environment == '' && 'test' || github.event.inputs.environment }}
     concurrency: ${{ github.event.inputs.environment == '' && 'test' || github.event.inputs.environment }}
     needs: [check]
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - name: Prepare environment variables
@@ -35,13 +34,6 @@ jobs:
           if [ -z "${HAS_VALID_ENV}" ]; then
             printf '%s\n' "ENVIRONMENT is not in accepted range" >&2
             exit 1
-          fi
-
-          PROD_ENVIRONMENT=$(jq -r '.productionEnvironment' infrastructurerc.json)
-          if [ "$ENVIRONMENT" == "$PROD_ENVIRONMENT" ]; then 
-            echo "is_production=true" >> $GITHUB_ENV
-          else
-            echo "is_production=false" >> $GITHUB_ENV
           fi
 
           ORG=$(jq -r '.org' infrastructurerc.json)
@@ -68,6 +60,7 @@ jobs:
               --query "Credentials")
 
           AWS_ACCESS_KEY_ID=$(echo $AUTHORISED_USER | jq -r '.AccessKeyId')
+          echo "::add-mask::${AWS_ACCESS_KEY_ID}" # Hide secret from logs
           echo "AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}" >> $GITHUB_ENV
 
           AWS_SECRET_ACCESS_KEY=$(echo $AUTHORISED_USER | jq -r '.SecretAccessKey')
@@ -78,10 +71,9 @@ jobs:
           echo "::add-mask::${AWS_SESSION_TOKEN}" # Hide secret from logs
           echo "AWS_SESSION_TOKEN=${AWS_SESSION_TOKEN}" >> $GITHUB_ENV
 
-          echo "AWS_ROLE_SESSION_NAME=cicd-access" >> $GITHUB_ENV
-      - name: Setup Node with cache
-        uses: actions/setup-node@v3
-        with: { node-version: "14", cache: "npm" }
+          echo "AWS_ROLE_SESSION_NAME=${{ env.aws_stack_name }}" >> $GITHUB_ENV
+      - uses: actions/setup-node@v3
+        with: { node-version: "16", cache: "npm" }
       - name: Install NPM packages
         run: npm ci
       - name: Compile TypeScript to JavaScript
@@ -98,8 +90,8 @@ jobs:
           sam deploy \
             --s3-bucket "${DEPLOY_BUCKET}" \
             --s3-prefix ${{ env.environment }} \
+            --config-env ${{ env.environment }} \
             --stack-name ${{ env.aws_stack_name }} \
             --capabilities CAPABILITY_IAM \
             --no-fail-on-empty-changeset \
-            --parameter-overrides "IsProduction=${{ env.is_production }}" \
             --no-confirm-changeset
