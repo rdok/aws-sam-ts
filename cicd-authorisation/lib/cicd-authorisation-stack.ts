@@ -1,9 +1,4 @@
-import {
-  CfnOutput,
-  RemovalPolicy,
-  Stack,
-  StackProps,
-} from "aws-cdk-lib";
+import { CfnOutput, RemovalPolicy, Stack, StackProps } from "aws-cdk-lib";
 import { Construct } from "constructs";
 import { BlockPublicAccess, Bucket } from "aws-cdk-lib/aws-s3";
 import { Role, User } from "aws-cdk-lib/aws-iam";
