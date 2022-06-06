@@ -14,10 +14,7 @@ InvokeExampleFunction:
 		--env-vars .env.json \
 		'ExampleFunction'
 
-deploy-cicd-auth:
-	cd cicd-authorisation && make deploy
-
-build-deploy-dev:
+build-deploy-cicd:
 	make build
 	AWS_ROLE_ARN=$$(aws --profile $$AWS_PROFILE \
 		cloudformation describe-stacks --stack-name $$AWS_CICD_STACK_NAME \
