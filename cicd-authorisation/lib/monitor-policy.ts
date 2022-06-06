@@ -9,19 +9,6 @@ export class MonitorPolicy {
       description: `Authorise monitor AWS resources for stack: ${stack.stackName}`,
       roles: [role],
     });
-    monitorPolicy.addStatements(
-      new PolicyStatement({
-        actions: [
-          "SNS:CreateTopic",
-          "SNS:GetTopicAttributes",
-          "SNS:DeleteTopic",
-        ],
-        effect: Effect.ALLOW,
-        resources: [
-          `arn:aws:sns:${stack.region}:${stack.account}:${stackRegex}`,
-        ],
-      })
-    );
 
     monitorPolicy.addStatements(
       new PolicyStatement({
