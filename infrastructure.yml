@@ -7,7 +7,8 @@ Resources:
   ExampleFunction:
     Type: AWS::Serverless::Function
     Properties:
-      Handler: dist/handlers/handler-example.handle
+      Handler: handlers/handler-example.handle
+      CodeUri: dist
       Runtime: nodejs16.x
       Environment:
         Variables:
@@ -18,7 +19,7 @@ Resources:
       ComparisonOperator: GreaterThanOrEqualToThreshold
       Dimensions: [{ Name: FunctionName, Value: !Ref ExampleFunction }]
       EvaluationPeriods: 1
-      Period: 60 # 1 minute
+      Period: 60
       MetricName: Errors
       Namespace: AWS/Lambda
       Statistic: Sum
