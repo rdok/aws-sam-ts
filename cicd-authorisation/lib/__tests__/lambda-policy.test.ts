@@ -1,8 +1,8 @@
-import { Stack } from "@aws-cdk/core";
+import { Stack } from "aws-cdk-lib";
 import { Config } from "../config";
-import { Template } from "@aws-cdk/assertions";
+import { Template } from "aws-cdk-lib/assertions";
 import { LambdaPolicy } from "../lambda-policy";
-import { Role, User } from "@aws-cdk/aws-iam";
+import { Role, User } from "aws-cdk-lib/aws-iam";
 
 const config = new Config();
 const stack = new Stack();

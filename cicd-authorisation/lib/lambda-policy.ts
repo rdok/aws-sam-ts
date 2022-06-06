@@ -1,5 +1,5 @@
-import { Stack } from "@aws-cdk/core";
-import { Effect, ManagedPolicy, PolicyStatement } from "@aws-cdk/aws-iam";
+import { Stack } from "aws-cdk-lib";
+import { Effect, ManagedPolicy, PolicyStatement } from "aws-cdk-lib/aws-iam";
 import { RolePolicyProps } from "./types";
 
 export class LambdaPolicy {

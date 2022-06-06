@@ -1,5 +1,5 @@
 import { Config } from "./config";
-import { Role, User } from "@aws-cdk/aws-iam";
+import { Role, User } from "aws-cdk-lib/aws-iam";
 
 export type RolePolicyProps = {
   role: Role;

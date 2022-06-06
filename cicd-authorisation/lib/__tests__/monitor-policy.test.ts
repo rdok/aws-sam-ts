@@ -1,7 +1,7 @@
-import { Stack } from "@aws-cdk/core";
+import { Stack } from "aws-cdk-lib";
 import { Config } from "../config";
-import { Match, Template } from "@aws-cdk/assertions";
-import { Effect, Role, User } from "@aws-cdk/aws-iam";
+import { Match, Template } from "aws-cdk-lib/assertions";
+import { Effect, Role, User } from "aws-cdk-lib/aws-iam";
 import { MonitorPolicy } from "../monitor-policy";
 
 const testStack = new Stack();

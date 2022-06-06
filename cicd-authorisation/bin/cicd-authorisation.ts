@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 import "source-map-support/register";
-import { App } from "@aws-cdk/core";
+import { App } from "aws-cdk-lib";
 import { CICDAuthorisationStack } from "../lib/cicd-authorisation-stack";
 import { Config } from "../lib/config";
 
